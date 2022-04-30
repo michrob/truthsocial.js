@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import { stringify } from 'query-string'
 import { OAUTH_URL, COMMON_HEADERS, API_V1_URL } from './config'
-import { TruthAccount, TruthAccountVerification } from './types/account'
 import { TruthLoginParams, TruthToken } from './types/auth'
 
 export const executeLogin = async (
@@ -15,24 +14,11 @@ export const executeLogin = async (
   return await response.json()
 }
 
-export const fetchVerifyAccount = async (
+export const truthAPIv1Call = async <ReturnType>(
+  path: string,
   token: TruthToken
-): Promise<TruthAccountVerification> => {
-  const response = await fetch(`${API_V1_URL}/accounts/verify_credentials`, {
-    headers: {
-      ...COMMON_HEADERS,
-      Authorization: `${token.token_type} ${token.access_token}`
-    },
-    method: 'GET'
-  })
-  return await response.json()
-}
-
-export const fetchAccount = async (
-  accountId: string,
-  token: TruthToken
-): Promise<TruthAccount> => {
-  const response = await fetch(`${API_V1_URL}/accounts/${accountId}`, {
+): Promise<ReturnType> => {
+  const response = await fetch(`${API_V1_URL}${path}`, {
     headers: {
       ...COMMON_HEADERS,
       Authorization: `${token.token_type} ${token.access_token}`

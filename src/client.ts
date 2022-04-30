@@ -1,6 +1,8 @@
 import { CLIENT_ID, CLIENT_SECRET } from './config'
-import { executeLogin, fetchAccount, fetchVerifyAccount } from './api'
+import { executeLogin, truthAPIv1Call } from './api'
 import { TruthToken } from './types/auth'
+import { TruthAccount, TruthAccountVerification } from './types/account'
+import { Truth } from './types/status'
 
 export class TruthClient {
   private token: TruthToken
@@ -17,7 +19,15 @@ export class TruthClient {
     return this.token
   }
 
-  account = async (accountId: string) => fetchAccount(accountId, this.token)
+  verifyCredentials = async () =>
+    truthAPIv1Call<TruthAccountVerification>(
+      `/accounts/verify_credentials`,
+      this.token
+    )
 
-  verifyCredentials = async () => fetchVerifyAccount(this.token)
+  account = async (accountId: string) =>
+    truthAPIv1Call<TruthAccount>(`/accounts/${accountId}`, this.token)
+
+  status = async (statusId: string) =>
+    truthAPIv1Call<Truth>(`/statuses/${statusId}`, this.token)
 }
