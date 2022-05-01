@@ -3,8 +3,8 @@
   "version": "0.0.7",
   "homepage": "https://github.com/michrob/truthsocial.js",
   "description": "Unofficial JS Client for TruthSocial",
-  "main": "./lib/src/index.js",
-  "typings": "./lib/src/index.d.ts",
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
   "keywords": [
     "Truth Social"
   ],
