@@ -16,14 +16,15 @@ export const executeLogin = async (
 
 export const truthAPIv1Call = async <ReturnType>(
   path: string,
-  token: TruthToken
+  token: TruthToken,
+  method: `GET` | `POST` = 'GET'
 ): Promise<ReturnType> => {
   const response = await fetch(`${API_V1_URL}${path}`, {
+    method,
     headers: {
       ...COMMON_HEADERS,
       Authorization: `${token.token_type} ${token.access_token}`
-    },
-    method: 'GET'
+    }
   })
   return await response.json()
 }

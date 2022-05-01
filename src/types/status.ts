@@ -31,11 +31,13 @@ export interface TruthMediaAttachment {
   blurhash: string
 }
 
+type TruthCardType = 'image' | 'video' | 'link'
+
 export interface TruthCard {
   url: string
   title: string
   description: string
-  type: TruthMediaType
+  type: TruthCardType
   author_name: string
   author_url: string
   provider_name: string

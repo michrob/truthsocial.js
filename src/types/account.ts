@@ -37,7 +37,7 @@ export interface TruthAccount {
   followers_count: number
   following_count: number
   statuses_count: number
-  last_status_at: string
+  last_status_at: string // yyyy-mm-dd
   verified: boolean
   location: string
   website: string

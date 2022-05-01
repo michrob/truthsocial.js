@@ -2,8 +2,9 @@
   "name": "truthsocial.js",
   "version": "0.0.2",
   "homepage": "https://github.com/michrob/truthsocial.js",
-  "description": "Connect to the truth",
-  "main": "index.js",
+  "description": "Unofficial JS Client for TruthSocial",
+  "main": "./lib/src/index.js",
+  "typings": "./lib/src/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
