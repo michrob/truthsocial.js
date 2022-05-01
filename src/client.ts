@@ -47,6 +47,9 @@ export class TruthClient {
 
   trends = async () => truthAPIv1Call<TruthTrend[]>(`/trends`, this.token)
 
+  trendingTruths = async () =>
+    truthAPIv1Call<Truth[]>(`/truth/trending/truths`, this.token)
+
   follow = async (accountId: string) =>
     truthAPIv1Call<TruthFollow>(
       `/accounts/${accountId}/follow`,
