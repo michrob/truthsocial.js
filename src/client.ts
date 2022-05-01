@@ -53,4 +53,11 @@ export class TruthClient {
       this.token,
       `POST`
     )
+
+  unfollow = async (accountId: string) =>
+    truthAPIv1Call<TruthFollow>(
+      `/accounts/${accountId}/unfollow`,
+      this.token,
+      `POST`
+    )
 }

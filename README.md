@@ -54,6 +54,9 @@ const trends = await client.trends()
 
 // Given an accountId, follows that user.
 const follow = await client.follow('107780257626128497')
+
+// Given an accountId, unfollows that user.
+const unfollow = await client.unfollow('108137954681674690')
 ```
 
 

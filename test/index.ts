@@ -12,11 +12,8 @@ const doScrape = async () => {
 
   console.log(token)
 
-  const account = await client.accountLookup('realDonaldTrump')
-  console.log(account)
-
-  const statuses = await client.accountStatuses(account.id)
-  console.log(statuses)
+  const follow = await client.follow('107780257626128497')
+  console.log(follow)
 }
 
 doScrape().then()
