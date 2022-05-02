@@ -12,8 +12,8 @@ const doScrape = async () => {
 
   console.log(token)
 
-  const follow = await client.follow('107780257626128497')
-  console.log(follow)
+  const trends = await client.trendingTruths()
+  console.log(trends[0].media_attachments[0].url)
 }
 
 doScrape().then()

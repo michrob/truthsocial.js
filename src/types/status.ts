@@ -50,6 +50,13 @@ export interface TruthCard {
   blurhash: string
 }
 
+export interface TruthMention {
+  id: string
+  username: string
+  url: string
+  acct: string
+}
+
 export interface Truth {
   id: string
   created_at: string // '2022-04-28T19:21:33.741Z'
@@ -69,10 +76,10 @@ export interface Truth {
   muted: boolean
   bookmarked: boolean
   content: string
-  reblog: null
+  reblog: Truth
   account: TruthAccount
   media_attachments: TruthMediaAttachment[]
-  mentions: []
+  mentions: TruthMention[]
   tags: TruthTag[]
   emojis: []
   card: TruthCard
