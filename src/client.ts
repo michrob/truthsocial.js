@@ -6,6 +6,8 @@ import { Truth } from './types/status'
 import { TruthFollow } from './types/follow'
 import { TruthTrend } from './types/trend'
 import { TruthSuggestion } from './types/suggestion'
+import { TruthRelationship } from './types/relationship'
+import { stringify } from 'query-string'
 
 export class TruthClient {
   private token: TruthToken
@@ -40,6 +42,12 @@ export class TruthClient {
   accountLookup = async (accountName: string) =>
     truthAPIv1Call<TruthAccount>(
       `/accounts/lookup?acct=${accountName}`,
+      this.token
+    )
+
+  relationships = async (accountIds: string[]) =>
+    truthAPIv1Call<TruthRelationship[]>(
+      `/accounts/relationships?${stringify({ 'id[]': accountIds })}`,
       this.token
     )
 

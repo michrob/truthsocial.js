@@ -46,6 +46,10 @@ const statuses = await client.accountStatuses(publicAccount.id)
 // Lookup an account given a username.
 const lookedUp = await client.accountLookup('realDonaldTrump')
 
+// Given a list of accountIds, responds with relationships towards your account,
+// such as whether you are following or followed by them.
+const relationships = await client.relationships(['107797156496908384'])
+
 // Given a statusId, responds with the status details.
 const status = await client.status('107797156496908384')
 
