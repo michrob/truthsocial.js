@@ -1,8 +1,13 @@
 import { CLIENT_ID, CLIENT_SECRET } from './config'
-import { executeLogin, truthAPIv1Call, truthAPIv2Call } from './api'
+import {
+  executeLogin,
+  truthAPIv1Call,
+  truthAPIv2Call,
+  truthAttachment
+} from './api'
 import { TruthToken } from './types/auth'
 import { TruthAccount, TruthAccountVerification } from './types/account'
-import { Truth } from './types/status'
+import { Truth, TruthMediaAttachment } from './types/status'
 import { TruthFollow } from './types/follow'
 import { TruthTrend } from './types/trend'
 import { TruthSuggestion } from './types/suggestion'
@@ -57,6 +62,25 @@ export class TruthClient {
       `/search/?q=${query}&type=${type}&resolve=true`,
       this.token
     )
+
+  postMedia = async (data: Buffer, mimetype: string) =>
+    truthAPIv1Call<TruthMediaAttachment>(`/media`, this.token, `POST`, {
+      data: truthAttachment(data, mimetype),
+      type: `file`
+    })
+
+  postStatus = async (status: string, mediaIds: string[]) =>
+    truthAPIv1Call<Truth>(`/statuses`, this.token, 'POST', {
+      data: stringify({
+        status,
+        visibility: 'public',
+        ...(mediaIds?.length > 0 ? { 'media_ids[]': mediaIds } : {})
+      }),
+      type: `params`
+    })
+
+  deleteStatus = async (statusId: string) =>
+    truthAPIv1Call<Truth>(`/statuses/${statusId}`, this.token, 'DELETE')
 
   status = async (statusId: string) =>
     truthAPIv1Call<Truth>(`/statuses/${statusId}`, this.token)

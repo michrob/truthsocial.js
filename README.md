@@ -56,6 +56,19 @@ const search = await client.status('TruthSocial', 'hashtags')
 // Given a statusId, responds with the status details.
 const status = await client.status('107797156496908384')
 
+// Given a statusId, delete the status.
+const deleted = await client.deleteStatus('107797156496908384')
+
+// Post a status, given text.
+const newStatus = await client.postStatus("Hello World!")
+
+// Post a status, given text and an optional list of mediaId values.
+// Note that in order to post videos or images, you must first call postMedia
+// and pass the id's you get back.
+const newMedia1 = await client.postMedia("./image.jpg", "image/jpeg")
+const newMedia2 = await client.postMedia("./image.mp4", "video/mp4")
+const newStatusWithMedia = await client.postStatus("Hello Media!", [newMedia1.id, newMedia2.id])
+
 // Loads trending hashtags with trailing week stats.
 const trends = await client.trends()
 
