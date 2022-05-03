@@ -49,3 +49,12 @@ export interface TruthAccountVerification extends TruthAccount {
   source: TruthAccountSource
   pleroma: TruthAccountPleroma
 }
+
+export interface TruthAccountUpdateRequest {
+  display_name?: string
+  website?: string
+  note?: string
+  location?: string
+  avatar?: string
+  header?: string
+}

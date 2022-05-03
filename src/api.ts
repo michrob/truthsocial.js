@@ -2,8 +2,9 @@ import fetch from 'isomorphic-fetch'
 import { stringify } from 'query-string'
 import { OAUTH_URL, COMMON_HEADERS, API_V1_URL, API_V2_URL } from './config'
 import { TruthLoginParams, TruthToken } from './types/auth'
+import { postHeaders } from './util'
 
-type HTTPMethod = `GET` | `POST` | `DELETE`
+type HTTPMethod = `GET` | `POST` | `DELETE` | `PATCH`
 
 interface TruthBodyParams {
   type: `params`
@@ -16,29 +17,6 @@ interface TruthBodyFile {
 }
 
 export type TruthHTTPBody = TruthBodyFile | TruthBodyParams
-
-const bodyContentType = {
-  params: `application/x-www-form-urlencoded; charset=utf-8`,
-  file: `multipart/form-data; boundary=MastodonKitBoundary`
-}
-
-const postHeaders = (body?: TruthHTTPBody) =>
-  !!body
-    ? {
-        'Content-Length': `${body.data.length}`,
-        'Content-Type': bodyContentType[body.type]
-      }
-    : {}
-
-export const truthAttachment = (data: Buffer, mimetype: string) => {
-  const header = Buffer.from(
-    `--MastodonKitBoundary\r\n` +
-      `Content-Disposition: form-data; name="file"; filename="file.jpg"\r\n` +
-      `Content-Type: ${mimetype}\r\n`
-  )
-  const footer = Buffer.from(`--MastodonKitBoundary--\r\n`)
-  return Buffer.concat([header, Buffer.from(`\r\n`), data, footer])
-}
 
 export const executeLogin = async (
   params: TruthLoginParams

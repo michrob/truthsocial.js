@@ -1,10 +1,5 @@
 import { CLIENT_ID, CLIENT_SECRET } from './config'
-import {
-  executeLogin,
-  truthAPIv1Call,
-  truthAPIv2Call,
-  truthAttachment
-} from './api'
+import { executeLogin, truthAPIv1Call, truthAPIv2Call } from './api'
 import { TruthToken } from './types/auth'
 import { TruthAccount, TruthAccountVerification } from './types/account'
 import { Truth, TruthMediaAttachment } from './types/status'
@@ -14,6 +9,7 @@ import { TruthSuggestion } from './types/suggestion'
 import { TruthRelationship } from './types/relationship'
 import { stringify } from 'query-string'
 import { TruthSearchResults, TruthSearchType } from './types/search'
+import { truthAccountUpdate, TruthAccountUpdate, truthAttachment } from './util'
 
 export class TruthClient {
   private token: TruthToken
@@ -49,6 +45,14 @@ export class TruthClient {
     truthAPIv1Call<TruthAccount>(
       `/accounts/lookup?acct=${accountName}`,
       this.token
+    )
+
+  updateAccount = async (request: TruthAccountUpdate) =>
+    truthAPIv1Call<TruthAccount>(
+      `/accounts/update_credentials`,
+      this.token,
+      `PATCH`,
+      { type: `params`, data: stringify(truthAccountUpdate(request)) }
     )
 
   relationships = async (accountIds: string[]) =>

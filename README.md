@@ -19,6 +19,7 @@ npm install truthsocial.js
 
 ```typescript
 import { TruthClient } from 'truthsocial.js'
+import fs from 'fs'
 
 // Creates a client instance
 const client = new TruthClient()
@@ -34,6 +35,24 @@ const token = await client.login(
 // Note that unlike the client.account() call below,
 // this response includes private fields such as email address.
 const privateAccount = await client.verifyCredentials()
+
+// Update account details including text and image fields.
+// Returns the updated account.
+const profilePic = fs.readFileSync('./image.jpg')
+const updatedAccount = await client.updateAccount({
+    displayName: 'My Name',
+    location: 'The internet',
+    website: 'https://www.npmjs.com/package/truthsocial.js',
+    bio: 'My bio',
+    avatar: {
+      mimetype: 'image/jpg',
+      data: profilePic
+    },
+    header: {
+      mimetype: 'image/jpg',
+      data: data
+    }
+})
 
 // Given an accounId, responds with the public fields associated with the account.
 const publicAccount = await client.account('107780257626128497')
@@ -65,8 +84,10 @@ const newStatus = await client.postStatus("Hello World!")
 // Post a status, given text and an optional list of mediaId values.
 // Note that in order to post videos or images, you must first call postMedia
 // and pass the id's you get back.
-const newMedia1 = await client.postMedia("./image.jpg", "image/jpeg")
-const newMedia2 = await client.postMedia("./image.mp4", "video/mp4")
+const jpg = fs.readFileSync('./image.jpg')
+const mp4 = fs.readFileSync('./video.mp4')
+const newMedia1 = await client.postMedia(jpq, "image/jpeg")
+const newMedia2 = await client.postMedia(mp4, "video/mp4")
 const newStatusWithMedia = await client.postStatus("Hello Media!", [newMedia1.id, newMedia2.id])
 
 // Loads trending hashtags with trailing week stats.
