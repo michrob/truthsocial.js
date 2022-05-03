@@ -50,6 +50,9 @@ const lookedUp = await client.accountLookup('realDonaldTrump')
 // such as whether you are following or followed by them.
 const relationships = await client.relationships(['107797156496908384'])
 
+// Searches accounts, hashtags, statuses for the specified query.
+const search = await client.status('TruthSocial', 'hashtags')
+
 // Given a statusId, responds with the status details.
 const status = await client.status('107797156496908384')
 

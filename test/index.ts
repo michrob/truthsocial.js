@@ -12,11 +12,8 @@ const doScrape = async () => {
 
   console.log(token)
 
-  const trends = await client.relationships([
-    '107764331655353190',
-    '107808859557707601'
-  ])
-  console.log(trends)
+  const trends = await client.search('Trump', 'hashtags')
+  console.log(JSON.stringify(trends, null, 2))
 }
 
 doScrape().then()
