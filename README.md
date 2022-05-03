@@ -52,6 +52,12 @@ const status = await client.status('107797156496908384')
 // Loads trending hashtags with trailing week stats.
 const trends = await client.trends()
 
+// Loads list of suggested accounts with an optional limit parameter.
+const suggestions = await client.suggestions()
+
+// Loads list of truths from your users home feed of followed accounts.
+const timeline = await client.timeline()
+
 // Given an accountId, follows that user.
 const follow = await client.follow('107780257626128497')
 

@@ -1,10 +1,11 @@
 import { CLIENT_ID, CLIENT_SECRET } from './config'
-import { executeLogin, truthAPIv1Call } from './api'
+import { executeLogin, truthAPIv1Call, truthAPIv2Call } from './api'
 import { TruthToken } from './types/auth'
 import { TruthAccount, TruthAccountVerification } from './types/account'
 import { Truth } from './types/status'
 import { TruthFollow } from './types/follow'
 import { TruthTrend } from './types/trend'
+import { TruthSuggestion } from './types/suggestion'
 
 export class TruthClient {
   private token: TruthToken
@@ -44,6 +45,11 @@ export class TruthClient {
 
   status = async (statusId: string) =>
     truthAPIv1Call<Truth>(`/statuses/${statusId}`, this.token)
+
+  suggestions = async (limit: number = 50) =>
+    truthAPIv2Call<TruthSuggestion[]>(`/suggestions?limit=${limit}`, this.token)
+
+  timeline = async () => truthAPIv1Call<Truth[]>(`/timelines/home`, this.token)
 
   trends = async () => truthAPIv1Call<TruthTrend[]>(`/trends`, this.token)
 

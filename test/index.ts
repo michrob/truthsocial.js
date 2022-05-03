@@ -12,8 +12,8 @@ const doScrape = async () => {
 
   console.log(token)
 
-  const trends = await client.trendingTruths()
-  console.log(trends[0].media_attachments[0].url)
+  const trends = await client.timeline()
+  console.log(trends)
 }
 
 doScrape().then()
