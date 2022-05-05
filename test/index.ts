@@ -15,25 +15,9 @@ const doScrape = async () => {
 
   console.log(token)
 
-  const trends = await client.updateAccount({
-    displayName: 'My Name',
-    location: 'The internet',
-    website: 'https://www.npmjs.com/package/truthsocial.js',
-    bio: 'My bio',
-    avatar: {
-      mimetype: 'image/jpg',
-      data: data
-    },
-    header: {
-      mimetype: 'image/jpg',
-      data: data
-    }
-  })
-  // const status = await client.postStatus('special message to the haters', [
-  //   trends.id
-  // ])
+  const status = await client.status(`108245429919908321`)
 
-  console.log(JSON.stringify(trends, null, 2))
+  console.log(JSON.stringify(status, null, 2))
 }
 
 doScrape().then()

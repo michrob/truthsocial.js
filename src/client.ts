@@ -2,7 +2,7 @@ import { CLIENT_ID, CLIENT_SECRET } from './config'
 import { executeLogin, truthAPIv1Call, truthAPIv2Call } from './api'
 import { TruthToken } from './types/auth'
 import { TruthAccount, TruthAccountVerification } from './types/account'
-import { Truth, TruthMediaAttachment } from './types/status'
+import { Truth, TruthContext, TruthMediaAttachment } from './types/status'
 import { TruthFollow } from './types/follow'
 import { TruthTrend } from './types/trend'
 import { TruthSuggestion } from './types/suggestion'
@@ -86,8 +86,14 @@ export class TruthClient {
   deleteStatus = async (statusId: string) =>
     truthAPIv1Call<Truth>(`/statuses/${statusId}`, this.token, 'DELETE')
 
-  status = async (statusId: string) =>
-    truthAPIv1Call<Truth>(`/statuses/${statusId}`, this.token)
+  status = async <T extends TruthContext | undefined = undefined>(
+    statusId: string,
+    context?: T
+  ) =>
+    truthAPIv1Call<T extends undefined ? Truth : Truth[]>(
+      `/statuses/${statusId}${!!context ? `/context/${context}` : ``}`,
+      this.token
+    )
 
   suggestions = async (limit: number = 50) =>
     truthAPIv2Call<TruthSuggestion[]>(`/suggestions?limit=${limit}`, this.token)

@@ -1,5 +1,7 @@
 import { TruthAccount } from './account'
 
+export type TruthContext = `descendants` | `ancestors`
+
 export interface TruthTag {
   name: string
   url: string
@@ -19,9 +21,9 @@ export interface TruthMediaAttachment {
   type: TruthMediaType
   url: string
   preview_url: string
-  external_video_id: null
-  remote_url: null
-  preview_remote_url: null
+  external_video_id: string
+  remote_url: string
+  preview_remote_url: string
   text_url: string
   meta: {
     original: TruthMediaAttachmentMeta
@@ -60,8 +62,8 @@ export interface TruthMention {
 export interface Truth {
   id: string
   created_at: string // '2022-04-28T19:21:33.741Z'
-  in_reply_to_id: null
-  in_reply_to_account_id: null
+  in_reply_to_id: string
+  in_reply_to_account_id: string
   sensitive: boolean
   spoiler_text: string
   visibility: string

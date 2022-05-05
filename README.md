@@ -73,6 +73,8 @@ const relationships = await client.relationships(['107797156496908384'])
 const search = await client.status('TruthSocial', 'hashtags')
 
 // Given a statusId, responds with the status details.
+// Optionally you can pass `ancestors` or `descendants`
+// and get back other Truths in the thread.
 const status = await client.status('107797156496908384')
 
 // Given a statusId, delete the status.
