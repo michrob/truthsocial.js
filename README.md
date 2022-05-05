@@ -107,6 +107,9 @@ const blocked = client.block(`108137954681674690`)
 // Unblock an account.
 const unblocked = client.unblock(`108137954681674690`)
 
+// Load the list of blocked accounts.
+const blocks = client.blocks(`108137954681674690`)
+
 // Loads trending hashtags with trailing week stats.
 const trends = await client.trends()
 
