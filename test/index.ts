@@ -15,7 +15,7 @@ const doScrape = async () => {
 
   console.log(token)
 
-  const status = await client.status(`108245429919908321`)
+  const status = await client.block(`108199274754651421`)
 
   console.log(JSON.stringify(status, null, 2))
 }

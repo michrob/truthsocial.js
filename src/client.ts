@@ -86,6 +86,38 @@ export class TruthClient {
   deleteStatus = async (statusId: string) =>
     truthAPIv1Call<Truth>(`/statuses/${statusId}`, this.token, 'DELETE')
 
+  block = async (accountId: string) =>
+    truthAPIv1Call<TruthRelationship>(
+      `/accounts/${accountId}/block`,
+      this.token,
+      `POST`
+    )
+
+  unblock = async (accountId: string) =>
+    truthAPIv1Call<TruthRelationship>(
+      `/accounts/${accountId}/unblock`,
+      this.token,
+      `POST`
+    )
+
+  blocks = async () => truthAPIv1Call<TruthAccount[]>(`/blocks`, this.token)
+
+  mute = async (accountId: string) =>
+    truthAPIv1Call<TruthRelationship>(
+      `/accounts/${accountId}/mute`,
+      this.token,
+      `POST`
+    )
+
+  unmute = async (accountId: string) =>
+    truthAPIv1Call<TruthRelationship>(
+      `/accounts/${accountId}/unmute`,
+      this.token,
+      `POST`
+    )
+
+  mutes = async () => truthAPIv1Call<TruthAccount[]>(`/mutes`, this.token)
+
   status = async <T extends TruthContext | undefined = undefined>(
     statusId: string,
     context?: T
