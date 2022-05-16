@@ -14,6 +14,10 @@ import { truthAccountUpdate, TruthAccountUpdate, truthAttachment } from './util'
 export class TruthClient {
   private token: TruthToken
 
+  setToken = (newToken: TruthToken) => {
+    this.token = newToken
+  }
+
   login = async (username: string, password: string) => {
     this.token = await executeLogin({
       username,
