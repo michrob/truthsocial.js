@@ -92,23 +92,26 @@ const newMedia1 = await client.postMedia(jpq, "image/jpeg")
 const newMedia2 = await client.postMedia(mp4, "video/mp4")
 const newStatusWithMedia = await client.postStatus("Hello Media!", [newMedia1.id, newMedia2.id])
 
+// Load notifications
+const notifications = await client.notifications()
+
 // Mute an account.
-const mute = client.mute(`108137954681674690`)
+const mute = await client.mute(`108137954681674690`)
 
 // Unmute an account.
-const unmute = client.unmute(`108137954681674690`)
+const unmute = await client.unmute(`108137954681674690`)
 
 // Load the list of muted accounts.
-const mutes = client.mutes(`108137954681674690`)
+const mutes = await client.mutes(`108137954681674690`)
 
 // Block an account.
-const blocked = client.block(`108137954681674690`)
+const blocked = await client.block(`108137954681674690`)
 
 // Unblock an account.
-const unblocked = client.unblock(`108137954681674690`)
+const unblocked = await client.unblock(`108137954681674690`)
 
 // Load the list of blocked accounts.
-const blocks = client.blocks(`108137954681674690`)
+const blocks = await client.blocks(`108137954681674690`)
 
 // Loads trending hashtags with trailing week stats.
 const trends = await client.trends()

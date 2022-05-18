@@ -71,6 +71,8 @@ export class TruthClient {
       this.token
     )
 
+  notifications = async () => truthAPIv1Call(`/notifications`, this.token)
+
   postMedia = async (data: Buffer, mimetype: string) =>
     truthAPIv1Call<TruthMediaAttachment>(`/media`, this.token, `POST`, {
       data: truthAttachment(data, mimetype),
