@@ -15,7 +15,7 @@ const doScrape = async () => {
 
   console.log(token)
 
-  const status = await client.notifications()
+  const status = await client.search('trump', `statuses`, 1)
 
   console.log(JSON.stringify(status, null, 2))
 }

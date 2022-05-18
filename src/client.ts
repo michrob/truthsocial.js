@@ -65,9 +65,11 @@ export class TruthClient {
       this.token
     )
 
-  search = async (query: string, type: TruthSearchType) =>
+  search = async (query: string, type: TruthSearchType, limit?: number) =>
     truthAPIv2Call<TruthSearchResults>(
-      `/search/?q=${query}&type=${type}&resolve=true`,
+      `/search/?q=${query}&type=${type}&resolve=true${
+        limit ? `&limit=${limit}` : ``
+      }`,
       this.token
     )
 
